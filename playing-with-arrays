@@ -1,0 +1,228 @@
+class MyArray():
+    def __init__(self):
+        self.length = 0
+        self.data = {}
+
+    # print the attributes of the array in string format
+    # without this, it just prints the memory space location
+    def __str__(self):
+        return str(self.__dict__)
+
+    # get data/access
+    # data lives on the self method
+    # index lives in the get method
+    # we comebine them
+    # get data at target index
+    def get(self, index):
+        return self.data[index]
+
+    # add item to end of list
+    def append(self, item):
+        self.length += 1
+        self.data[self.length-1] = item
+
+    # return the last item
+    def pop(self):
+        # picks last item
+        lastItem = self.data[self.length - 1]
+        del self.data[self.length - 1]
+        self.length -= 1
+        return lastItem
+
+    # add item anywhere to list
+    def insert(self, index, item):
+        # to add, we create a new space in line to insert something
+        self.length += 1
+        for i in range(self.length - 1, index, -1):
+            self.data[i] = self.data[i-1]
+        self.data[index] = item
+
+    def extend(self, items):
+        for item in items:
+            self.append(item)
+
+    def includes(self, item):
+        for i in range(self.length):
+            if self.data[i] == item:
+                return True
+
+        return False
+
+    # before delete {0: 1, 1: 2, 2: 3, 3: 4}}
+    # after delete: {0: 2, 1: 3, 2: 4}}
+    # so since I targetted index 0 to be deleted,
+    # i+1 got equaled to i, which said value 2 moves over left to where value 1 was, and then value 3 moves left to where value 2 was and value 4 moves over to where value 3 was at
+    # then after we delete the new last index slot and then decrement the last ending slot so shorten the array?
+    def delete(self, index):
+        for i in range(index, self.length-1):
+            self.data[i] = self.data[i+1]
+        del self.data[self.length - 1]
+        self.length -= 1
+
+    def copy(self, item):
+        for i in range(self.length):
+            if self.data[i] == item:
+                copied = item
+                print(f'{item} has been copied')
+                return copied
+
+    def count(self, item):
+        counter = 0
+
+        for i in range(self.length):
+            if self.data[i] == item:
+                counter += 1
+        return counter
+
+    def index(self, item):
+        for i in range(self.length):
+            if self.data[i] == item:
+                return i
+
+    def clear(self):
+        self.data = {}
+        self.length = 0
+
+    def remove(self, item):
+        # i loops until it finds 'tesla'
+        for i in range(self.length):
+            if self.data[i] == item:
+                # j loop shifts right items over left
+                for j in range(i, self.length - 1):
+                    self.data[j] = self.data[j+1]
+                # the data at the end, we delete
+                # then decrement array length
+                # index 3 is empty because of the loop, so we remove it by shortening our list
+                del self.data[self.length - 1]
+                self.length -= 1
+                return
+        raise ValueError(f'{item} is not in the list')
+
+    def reverse(self):
+        reversed_data = {}
+        for i in range(self.length):
+            # i in range starts at 0 index
+            # so length of 4 - 1 = 3
+            # 3 - 0 is 3
+            # index 3 -> donburi
+
+            # i in range goes to 1 index
+            # so length of 4 - 1 = 3
+            # 3 - 1 is 2
+            # index 2 -> banana
+
+            # i in range goes to 2 index
+            # so length of 4 - 1 = 3
+            # 3 - 2 is 1
+            # index 1 -> crackers
+
+            # i in range goes to 3 index
+            # so length of 4 - 1 = 3
+            # 3 - 3 is 0
+            # index 0 -> apple
+
+            reversed_data[i] = self.data[self.length - 1 - i]
+        self.data = reversed_data
+
+    # overall lessons: j is swapping with value after j
+    def sort_list(self, nums):
+        n = len(nums)
+        # 0, 1, 2, 3
+        # nums = [3, 2, 4, 1]
+        for i in range(n):
+            # n - i - 1
+            # 4 - 0 - 1 = 3
+            # range is between 0 and 3 for indexes
+            # working with index 0, index 1, index 2
+            # does not touch index 3, which is value of 1
+
+            # if left is biger than right
+            # we swap right with left value
+            # if 3 is bigger than 2,
+            # we swap 3 with 2
+            # result: [2,3,4,1]
+
+            # 4 - 1 - 1 = 2
+            # range is between 0 and 2
+            # I think they check index 0 and 1, then shift over
+            # now checking 3 and 4, those are okay so shifts over again
+
+            # 4 - 2 - 1 = 1
+            # range is now checking 0
+            # checks 4 and 1
+            # j is bigger than j+1
+            # 4 is bigger than 1
+            # result is [3, 2, 1, 4]
+
+            # 3 is bigger than 2 -> [2, 3, 1, 4]
+            # 3 > 1 -> [2, 1, 3, 4] -> [1, 2, 3, 4]
+
+            for j in range(0, n - i - 1):
+                if nums[j] > nums[j + 1]:
+                    nums[j], nums[j+1] = nums[j+1], nums[j]
+        return nums
+
+
+new_array = MyArray()
+
+# === APPEND ITEM TO END OF LIST ===
+new_array.append('apple')
+new_array.append('banana')
+new_array.append('crackers')
+new_array.append('donburi')
+
+# === APPEND LIST TO END OF LIST ===
+# append a list's values
+new_array.extend(['tesla', 'buick', 'jeep', 'airplane', 'jet'])
+
+# checks if item in included in the dictionary
+print(new_array.includes('tesla'))
+
+# mutates the original data
+print(new_array.pop())
+
+
+# === ADD COPY TO END OF LIST ===
+copied_2 = new_array.copy(2)
+print('your copied item:', copied_2)
+
+new_array.append(copied_2)
+# print(new_array)
+
+# === INSERT AT INDEX, OUR ITEM
+new_array.insert(3, 'hi')
+new_array.insert(4, 'hi')
+print(new_array)
+
+# === POP OFF LAST ITEM IN LIST ===
+new_array.pop()
+# print(new_array)
+
+# === TIMES AN ITEM APPEARS ===
+times_hi_appears = new_array.count('hi')
+print(f'hi appears {times_hi_appears} times')
+
+# === FIND INDEX OF ITEM ===
+find_index_of = new_array.index('banana')
+print(new_array)
+print(f'banana has an index of {find_index_of}')
+
+# === CLEAR ALL ITEMS
+# new_array.clear()
+# print(new_array)
+
+# === REMOVE FIRST ITEM IN LIST ===
+print(new_array)
+new_array.remove('tesla')
+print(new_array)
+
+
+print(new_array)
+
+print("=======")
+
+new_array.reverse()
+print('reversed array:', new_array)
+
+print(new_array.sort_list([3, 2, 4, 1]))
+
