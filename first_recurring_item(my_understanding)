@@ -1,0 +1,64 @@
+# google question
+# given an array = [2,5,1,2,3,5,1,2,4]
+# should run 2
+
+# given an array = [2,1,1,2,3,5,1,2,4]
+# should run 1
+
+# given an array = [2,3,4,5]
+# should run undefined
+
+
+# simple solution - as it is scanning from start to end, it sees the duplicates
+
+# 🧠: we set the numbers to true within the dictionary since its the first time seeing them
+# when we see the number again, a duplicate, we return the item due to the if statement
+def frc_1(array):
+    dictionary = dict()
+    # looping thru array we pass in
+    for item in array:
+        if item in dictionary:
+            print(item)
+            return item
+        else:
+            dictionary[item] = True
+    return None
+
+
+array_1 = [2, 5, 1, 2, 3, 5, 1, 2, 4]
+print(frc_1(array_1))
+
+
+def frc_2(array):
+    l = len(array)
+    i = 0
+    frc = None
+
+    # i is less than length, so increment j
+    while (i < l):
+        j = i+1
+        # now that we're incrementing j
+        # as long as j has not hit the end, do something
+        while (j < l):
+            # if duplicate found, make the new length of the array be the value of what was found
+            # index 5 is not less than length 5, so it falses out and terminates?
+            if array[i] == array[j]:
+                l = j
+                # we save the value that recurred for later use
+                frc = array[j]
+                # continue
+                continue
+            # if no match is found, keep incrementing j to keep searching
+            else:
+                j += 1
+        # i moves forward, j resets to just ahead of i and loops again
+        i += 1
+
+    # since we did find a match, we jump out of that inner while loop
+    # and return the frc
+    return frc
+
+
+array_2 = [4, 1, 5, 2, 6, 2]
+
+print(frc_2(array_2))
