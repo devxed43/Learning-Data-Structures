@@ -1,0 +1,17 @@
+def reverse_string(str):
+    reversed_string = []
+    length = len(str)
+
+    # loop over
+    # append each iteration to backwards array/list
+    # -1 stops after index 0
+    # -1 says count backwards from our starting point at the end
+    # append each iteration within our string "array"
+    for i in range(length - 1, -1, -1):
+        reversed_string.append(str[i])
+
+    return "".join(reversed_string)
+
+
+print(reverse_string('my string')) # gnirts ym
+
