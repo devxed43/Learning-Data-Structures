@@ -1,0 +1,20 @@
+def merge_sorted_lists(arr1, arr2):
+    merged_list = []
+
+    i = 0
+    j = 0
+
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            merged_list.append(arr1[i])
+            i += 1
+        else:
+            merged_list.append(arr2[j])
+            j += 1
+
+    merged_list += arr1[i:]
+    merged_list += arr2[j:]
+
+    return merged_list
+
+print(merge_sorted_lists([53, 66, 230], [0, 600, 3001]))
