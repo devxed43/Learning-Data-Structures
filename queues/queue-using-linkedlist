@@ -1,0 +1,76 @@
+class Node():
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class Queue():
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.length = 0
+
+    # who is first in line?
+    def peek(self):
+        return self.first.data
+
+    def enqueue(self, data):
+        new_node = Node(data)
+
+        # if no one is in line, the new_node is our first and last node
+        if self.last == None:
+            self.last = new_node
+            self.first = self.last
+            self.length += 1
+            return
+        else:
+            # the latest person to join the line, their next pointer is pointing backwards to the next new latest perosn
+            self.last.next = new_node
+            self.last = new_node
+            self.length += 1
+            return
+
+    def dequeue(self):
+        if self.last == None:
+            print("Quue Empty")
+            return
+        if self.last == self.first:
+            self.last = None
+        # the person after first aka second in line is now the new first since we remove the first
+        self.first = self.first.next
+        self.length -= 1
+        return
+
+    def print_queue(self):
+        if self.length == 0:
+            print("Queue Empty")
+            return
+        else:
+            current_pointer = self.first
+            while (current_pointer != None):
+                if current_pointer.next == None:
+                    print(current_pointer.data)
+                else:
+                    print(f'{current_pointer.data}  <<--  ', end='')
+                current_pointer = current_pointer.next
+            return
+
+
+my_queue = Queue()
+
+# the values get added left to right
+# Eddie is first, Freddy second, Betty Third
+my_queue.enqueue('Eddie')
+my_queue.enqueue('Freddy')
+my_queue.enqueue('Betty')
+my_queue.enqueue('Daniel')
+my_queue.enqueue('Samantha')
+
+my_queue.dequeue()
+my_queue.dequeue()
+my_queue.dequeue()
+my_queue.dequeue()
+my_queue.dequeue()
+
+my_queue.print_queue()
+# Queue Empty
