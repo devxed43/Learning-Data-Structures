@@ -1,0 +1,57 @@
+class CrazyQueue:
+    def __init__(self):
+        # we create two lists to pop them into each other
+        self.first = []
+        self.last = []
+
+    def enqueue(self, value):
+        # first list is empty initially
+        length = len(self.first)
+
+        # for in range of empty first list
+        # empty so it doesn't run
+        # no length to iterate over
+        for _ in range(length):
+            # into last list, we append the value we popped from first
+            self.last.append(self.first.pop())
+
+        # we add the value we want to enqueue into last list
+        self.last.append(value)
+        
+        return self
+
+    def dequeue(self):
+        length = len(self.last)
+
+        for _ in range(length):
+            self.first.append(self.last.pop())
+
+        # if self.first:
+        #     self.first.pop()
+            
+        return self
+
+    def peek(self):
+        if len(self.first) > 0:
+            return self.first[-1]
+        
+        if len(self.last) > 0:
+            return self.last[0]
+        
+        return None
+
+    # Adding a helper to view the object state like console.log(myQueue)
+    def __repr__(self):
+        return f"CrazyQueue(first={self.first}, last={self.last})"
+
+# Testig the implementation
+my_queue = CrazyQueue()
+
+my_queue.enqueue('Joy')
+my_queue.enqueue('Matt')
+my_queue.enqueue('Pavel')
+
+my_queue.dequeue()
+
+
+print(my_queue)
