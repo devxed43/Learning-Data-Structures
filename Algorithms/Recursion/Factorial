@@ -1,0 +1,47 @@
+# note: I thought that it was saying 5 * 4 for 5 factorial but its 5 * what is the result of the factorial function when it takes in 5 -4? 
+# the result cannot complete because the loop begins again until the number is less than or equal to 1
+# when the number from the else block becomes 1, the if block returns 1, and that 1 that gets returned gets fed back 
+# into the else block which begins to calculate the functions that got stacked on each other
+# factorial 5 is at the bottom
+# factorial 2 is at the top
+# the structure is LIFO
+# so we calculate factorial 2, then factorial 3, then factorial 4, then factorial 5 returns our 120 result
+
+# counter = 0
+
+
+# def inception():
+#     global counter
+#     print(counter)
+#     if counter > 300:
+#         print('hello')
+#     counter += 1
+#     inception()
+
+
+# inception()
+
+# ==================================
+
+# write 2 functions that find factorial of any num
+# One should be recursive
+
+
+def recursive_factorial(number):
+    if number <= 1:
+        return 1
+    else:
+        return number * recursive_factorial(number-1)
+
+
+# Other should be for loop
+def iterative_factorial(n):
+    f = 1
+
+    for i in range(1, n+1):
+        f = f * i
+    return f
+
+
+print(iterative_factorial(5))
+print(iterative_factorial(5))
