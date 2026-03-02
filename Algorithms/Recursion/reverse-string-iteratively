@@ -1,0 +1,22 @@
+# note: my conceptualization
+
+# rev is our empty string we use to build the new reversed string.
+# we loop over a range of the length of the string we want reversed
+# we reinitialize the rev variable, which held our ""
+# we say on the "", add the string[index to access is calculated based off length of said string minus index minus 1]
+# so str[5-rangeIndex - 1] => which character to pick off
+# so str[5-rangeIndex 0 - 1 = 4] => o
+# so str[5-rangeIndex 1 - 1 = 3] => l
+# so str[5-rangeIndex 2 - 1 = 2] => l
+# so str[5-rangeIndex 3 - 1 = 1] => e
+# so str[5-rangeIndex 4 - 1 = 0] => h
+
+def reverse_str_iteratively(str):
+    rev = ""
+
+    for i in range(len(str)):
+        rev = rev + str[len(str)-i-1]
+    return rev
+
+
+reverse_str_iteratively("hello")
