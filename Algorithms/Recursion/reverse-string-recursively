@@ -1,0 +1,19 @@
+# Note: my conceptualization:
+# on each iteration we slice off the string at index 1 onward, which we pass into the next iteration. the str[0] saves the first character each time, which gets put onto the call stack, which can't finish computing until the if condition is met,
+# when length of the string returned becomes 0, we return an empty string in the if statement. this returns into the else block our ""
+# from that empty string we get "" + the letters that were popped off the string on each iteration. each letter is waiting on the call stack. so m is at the bottom of the call stack because it is the oldest, then u, then s, then i, then c
+# when we reach the end, we start popping off from the call stack from top to bottom
+# so onto that empty string, we start adding in c, i, s, u, m
+# finally returning our reversed string of cisum
+
+def reverse_recursive(str):
+    print(str)
+
+    if len(str) == 0:
+        return ""
+
+    else:
+        return reverse_recursive(str[1:]) + str[0]
+
+
+print(reverse_recursive("music"))
