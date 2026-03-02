@@ -1,0 +1,26 @@
+# def bubble_sort(array):
+#     for i in array:
+#         for j in array:
+#             if j < i:
+#                 temp =
+
+
+# array = [5, 9, 3, 10, 45, 2, 0]
+
+# print(bubble_sort(array))
+
+
+array = [99, 44, 6, 2, 1, 5, 63]
+
+def bubble_sort(array):
+    count = 0
+    for i in range(len(array) - 1):
+        print(array)
+        for j in range(len(array) - i - 1):
+            count += 1
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+    return f'{array} \nNumber of comparisons = {count}'
+
+
+print(bubble_sort(array))
