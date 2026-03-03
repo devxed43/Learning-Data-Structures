@@ -1,0 +1,38 @@
+// I commented out faster fib to run slower fib and vice versa and the amount of calculations was massive
+
+calcs = 0
+
+
+def fib(n):
+    global calcs
+    calcs += 1
+    if n < 2:
+        return n
+    else:
+        return fib(n-1) + fib(n-2)
+
+
+def dynamic_fib():
+    cache = {}
+
+    def fib(n):
+        global calcs
+        calcs += 1
+        if n in cache:
+            return cache[n]
+        else:
+            if n < 2:
+                return n
+            else:
+                cache[n] = fib(n-1) + fib(n-2)
+                return cache[n]
+
+    return fib
+
+
+fast_fib = dynamic_fib()
+slow_fib = fib  # no () here, fib takes n directly
+
+# print('slow fib', slow_fib(10))
+print('DP', fast_fib(10))
+print(f'we did {calcs} calculations')
