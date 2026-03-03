@@ -6,19 +6,23 @@
 # print(addTo80(100))
 # print(addTo80(100))
 
-# ======
-
+# ===============================================================
+# Note:
+# if statement doesn't run because cache doesn't have a value yet
+# else statement runs, calculates, and stores in the cache
+# second time around if the function is run again, 
+# the if statement simply returns the value in the cache due to else statement 
+# doing the initial work
 cache = {}
+
 
 def memoizedAddTo80(n):
     if n in cache:
         return cache[n]
     else:
+        print('long time')
         cache[n] = n + 80
+        return cache[n]
 
 
-# first run => None
-print(memoizedAddTo80(100))
-
-# second run => 180
 print(memoizedAddTo80(100))
