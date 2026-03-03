@@ -26,3 +26,69 @@ def memoizedAddTo80(n):
 
 
 print(memoizedAddTo80(100))
+
+# ===============================================================
+
+
+# when I do this: memoized = memoized_add_to_80()
+
+# the outer function and inner function get set up ready to calculate
+
+# then inner gets returned, which runs the function with the 10,
+
+# this updates the cache with {10:90}
+
+# then this runs
+# print('second', memoized(10))
+# it doesn't recalculate, it just accesses the value at key 10
+# but this:
+# print('new first', memoized(11))
+# will re-run everything in order to update the cache?
+
+def memoized_add_to_80():
+    cache = {}
+
+    def inner(n):
+        if n in cache:
+            return cache[n]
+        else:
+            print('this ran because value not in cache yet')
+            cache[n] = n + 80
+            return cache[n]
+
+    return inner
+
+
+# 1.) the moment I run this, memoize now points at inner
+memoized = memoized_add_to_80()
+
+# 2.) when I run this, 10 plugs into inner, and cache updates
+print('1 set key:', memoized(10))
+print('2 retrieve key:', memoized(10))
+
+print('3 set key:', memoized(12))
+print('4 retrieve key:', memoized(12))
+
+
+print('5 set key:', memoized(11))
+print('6 retrieve key:', memoized(11))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
