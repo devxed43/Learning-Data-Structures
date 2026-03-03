@@ -1,0 +1,24 @@
+# has to run 3 times. inefficient
+# def addTo80(n):
+#     return n + 80
+
+# print(addTo80(100))
+# print(addTo80(100))
+# print(addTo80(100))
+
+# ======
+
+cache = {}
+
+def memoizedAddTo80(n):
+    if n in cache:
+        return cache[n]
+    else:
+        cache[n] = n + 80
+
+
+# first run => None
+print(memoizedAddTo80(100))
+
+# second run => 180
+print(memoizedAddTo80(100))
